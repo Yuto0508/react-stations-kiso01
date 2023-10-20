@@ -13,6 +13,15 @@
   }
 }
 
+.CssComponent {
+  /* 新しく追加したHeader */
+  color: white;
+  background-color: #66CC99;
+  border-top: 1px solid #66CC99;
+  border-bottom: 1px solid #66CC99;
+}
+
+/*デフォルトのheader 
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -22,7 +31,9 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
+} */
+
+
 
 .App-link {
   color: #61dafb;
