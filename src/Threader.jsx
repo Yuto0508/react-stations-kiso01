@@ -1,20 +1,27 @@
 // @ts-check
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+// import { BreedsSelect } from './BreedsSelect'
 
 // import {  } from './⇒<></>のフォーマット'
 
-export const Threader = () => {
-    const [Url, setUrl] = useState(
-        fetch('2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com')
-        .then(response => response.json())
-        .then(data => {
-          setUrl(data.message)
-        })
-    )
+  export const Threader = () => {
+    const [Url, setUrl] = useState([]);
+    const [selected, setSelected] = useState()
+      
+    
+   const handleGet = selected => {
+    setSelected(selected)
+   }
 
-    // // return ( 
-    // //     <>
-    // //     <p>スレッドをたてる</p>
-    // //     </>
-    // );
-    };
+  return (
+      <header className="CssComponent2">
+        <div className="submit">
+          <button id="ThreadIbent" onClick={handleGet}>
+            スレッドを立てる
+          </button>
+        </div>      
+      </header>
+
+      
+  );
+};
