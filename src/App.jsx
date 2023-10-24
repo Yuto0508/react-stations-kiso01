@@ -8,6 +8,7 @@ import React from "react";
 import { Header } from "./Header";
 import { Threader } from "./Threader";
 import { ThreadList } from "./ThreadList";
+import { Threadcreationscreen } from "./Threadcreationscreen";
 
 export const App = () => {
   return (
@@ -15,6 +16,7 @@ export const App = () => {
       <Header />
       <Threader />
       <ThreadList />
+      <Threadcreationscreen />
 
       <div className="Top">
         <a href="https://www.google.com/webhp">Topに戻る</a>
