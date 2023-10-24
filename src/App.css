@@ -1,48 +1,49 @@
 .CssComponent {
   /* 新しく追加したHeader */
   color: white;
-  background-color: #66CC99;
-  border-top: 1px solid #66CC99;
-  border-bottom: 1px solid #66CC99;
+  background-color: #66cc99;
+  border-top: 1px solid #66cc99;
+  border-bottom: 1px solid #66cc99;
+  text-align: center;
 }
 
-h1{
-  font-size:2.5em;
+h1 {
+  font-size: 2.5em;
 }
-.CssComponent2{
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.Top {
+  font-size: 1.4em;
+  position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.CssComponent2 {
   /* 「スレッドをたてる」を一番右側の右上に寄せる */
   width: 200px;
   height: 180px;
-  font-size:0.8em;
-  position:fixed;	
-  top:0px;
-  right:0px;
+  font-size: 0.8em;
+  position: fixed;
+  top: 0px;
+  right: 0px;
 }
 
-.submit{
-  color: white;
-}
-
-
-h2{
-  font-size: 30px;
-}
-
-form {
-  height: 20%;
-  padding: 10%;
+.submit {
+  font-size: 1.8em;
 }
 
 /* ここから下はデフォルト */
-
 
 /* @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }⇒デフォルト
 } */
-
-
 
 /*デフォルトのheader 
 .App-header {
@@ -55,8 +56,6 @@ form {
   font-size: calc(10px + 2vmin);
   color: white;
 } */
-
-
 
 /* .App-link {
   color: #61dafb;⇒デフォルト
