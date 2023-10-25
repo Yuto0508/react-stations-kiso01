@@ -15,7 +15,7 @@ export const Threader = () => {
   return (
     <header className="CssComponent2">
       <div className="submit">
-        <a href="https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads">
+        <a href="http://localhost:3000/">
           スレッドを立てる
         </a>
       </div>
