@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Threader } from "./Threader";
 
 export const ThreadList = () => {
   const [thread, setthread] = useState([]);
@@ -34,9 +33,8 @@ export const ThreadList = () => {
   });
 
   return (
-    <>
-      <h2> 新着スレッド</h2>
+    <div className="createdThread">
       <ul className="newThreadList">{newThreadList}</ul>
-    </>
+    </div>
   );
 };

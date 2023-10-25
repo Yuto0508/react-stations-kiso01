@@ -9,18 +9,23 @@ import { Header } from "./Header";
 import { Threader } from "./Threader";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
+import { BrowserRouter } from "react-router-dom";
 
 export const App = () => {
   return (
     <>
+    <BrowserRouter>
       <Header />
       <Threader />
-      <ThreadList />
       <Threadcreationscreen />
+      <ThreadList />
+      
+      
 
       <div className="Top">
         <a href="https://www.google.com/webhp">Topに戻る</a>
       </div>
+      </BrowserRouter>
     </>
   );
 };
