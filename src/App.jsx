@@ -23,7 +23,7 @@ export const App = () => {
       
 
       <div className="Home">
-        <a href="chrome://newtab/">ホームに戻る</a>
+        <a href="https://www.google.com/webhp">ホームに戻る</a>
       </div>
       </BrowserRouter>
     </>

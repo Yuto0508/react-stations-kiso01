@@ -54,16 +54,6 @@ export const Threadcreationscreen = () => {
     }
   }
 
-  //// タイトルのチェック
-  //  const isTitleValid = check();
-  //  if (isTitleValid) {
-  //    (async () => {
-  // APIリクエストと画面遷移を実行
-  //      await api();
-  //      move();
-  //    })();
-  //  }
-
   return (
     // スレッドを作るフォーム
     <div className="OnclickButton">
