@@ -14,7 +14,7 @@ export const Threadcreationscreen = () => {
 
     const url =
       "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads";
-    console.log(url);
+      console.log(url);
 
     const titleJson = {
       title: title,
@@ -58,9 +58,12 @@ export const Threadcreationscreen = () => {
         // 非同期処理を順次実行
         await api();
         move();
+        // window.location.href = "http://localhost:3000/"; 
+        // リダイレクト先のURLを設定
       })();
     }
   }
+ 
 
   return (
     // スレッドを作るフォーム
@@ -70,9 +73,7 @@ export const Threadcreationscreen = () => {
         <label htmlFor="title">▼スレッドタイトルを入力してください。</label>
         <input id="title" type="text" onChange={onChange} />
       </div>
-      <button type="button" onClick={OnclickButton}>
-        スレッドを作る
-      </button>
+      <button type="button" onClick={OnclickButton} >スレッドを作る</button>
     </div>
   );
 };
