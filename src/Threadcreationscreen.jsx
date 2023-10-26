@@ -10,38 +10,46 @@ export const Threadcreationscreen = () => {
   };
 
   async function OnclickButton(event) {
+    event.preventDefault(); // フォームのデフォルトの送信を防ぐ
+
     const url =
       "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads";
+      console.log(url);
+
     const titleJson = {
       title: title,
     };
     console.log(titleJson);
+
     const fetchData = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(titleJson),
     };
+
     // タイトルのバリデーションを行う関数
     const check = () => {
       if (title == "") {
         alert("スレッドタイトルを入力してください");
-        event.preventDefault(); // フォームのデフォルトの送信を防ぐ
         return false;
         //文字が入っていない場合falseと表示。
       }
       return true;
       //文字が入っている場合trueと表示。
     };
+
     // APIリクエストを送信する非同期関数
     const api = async () => {
       console.log(title);
       const response = await fetch(url, fetchData);
       return response.text();
     };
+
     // 画面遷移を行う関数
     const move = () => {
       navigate("/");
     };
+
     // タイトルのバリデーションを実行し、結果を保存
     const isTitleValid = check();
     // タイトルが無効な場合は処理を中断
@@ -50,9 +58,11 @@ export const Threadcreationscreen = () => {
         // 非同期処理を順次実行
         await api();
         move();
+        // window.location.href = "http://localhost:3000/"; // リダイレクト先のURLを設定
       })();
     }
   }
+ 
 
   return (
     // スレッドを作るフォーム
@@ -62,7 +72,7 @@ export const Threadcreationscreen = () => {
         <label htmlFor="title">▼スレッドタイトルを入力してください。</label>
         <input id="title" type="text" onChange={onChange} />
       </div>
-      <button onClick={OnclickButton}>スレッドを作る</button>
+      <button type="button" value="スレッドを作る"  onClick={OnclickButton} >スレッドを作る</button>
     </div>
   );
 };

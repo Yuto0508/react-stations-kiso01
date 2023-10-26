@@ -1,5 +1,5 @@
 // @ts-check
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 // import { BreedsSelect } from './BreedsSelect'
 
 // import {  } from './⇒<></>のフォーマット'
@@ -15,7 +15,7 @@ export const Threader = () => {
   return (
     <header className="CssComponent2">
       <div className="submit">
-        <a href="http://localhost:3000/">
+        <a href="url">
           スレッドを立てる
         </a>
       </div>
