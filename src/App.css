@@ -8,14 +8,14 @@
 }
 
 h1 {
-  font-size: 3.0em;
+  font-size: 3em;
 }
 
 .Home {
   font-size: 1.4em;
   position: absolute;
-    bottom: 0;
-    left: 0;
+  bottom: 0;
+  left: 0;
 }
 
 .CssComponent2 {
@@ -37,7 +37,7 @@ h1 {
   text-align: center;
 }
 
-.intitle label{
+.intitle label {
   font-size: 20px;
   display: flex;
   flex-direction: column;
@@ -47,4 +47,8 @@ h1 {
 .intitle input {
   width: calc(50% - 50px); /* 残りの幅を入力フィールドに割り当てます */
   box-sizing: border-box; /* 幅がボーダーボックス内に収まるようにします */
+}
+
+.example {
+  border: 1px solid #333;
 }
