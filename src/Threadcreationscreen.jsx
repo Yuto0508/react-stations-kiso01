@@ -2,7 +2,6 @@ import "./App.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-
 export const Threadcreationscreen = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState();
@@ -15,7 +14,7 @@ export const Threadcreationscreen = () => {
 
     const url =
       "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads";
-      console.log(url);
+    console.log(url);
 
     const titleJson = {
       title: title,
@@ -62,7 +61,6 @@ export const Threadcreationscreen = () => {
       })();
     }
   }
- 
 
   return (
     // スレッドを作るフォーム
@@ -72,7 +70,9 @@ export const Threadcreationscreen = () => {
         <label htmlFor="title">▼スレッドタイトルを入力してください。</label>
         <input id="title" type="text" onChange={onChange} />
       </div>
-      <button type="button" onClick={OnclickButton} >スレッドを作る</button>
+      <button type="button" onClick={OnclickButton}>
+        スレッドを作る
+      </button>
     </div>
   );
 };
