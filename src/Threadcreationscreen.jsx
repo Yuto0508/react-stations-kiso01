@@ -2,6 +2,7 @@ import "./App.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
+
 export const Threadcreationscreen = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState();
@@ -58,7 +59,6 @@ export const Threadcreationscreen = () => {
         // 非同期処理を順次実行
         await api();
         move();
-        // window.location.href = "http://localhost:3000/"; // リダイレクト先のURLを設定
       })();
     }
   }
@@ -72,7 +72,7 @@ export const Threadcreationscreen = () => {
         <label htmlFor="title">▼スレッドタイトルを入力してください。</label>
         <input id="title" type="text" onChange={onChange} />
       </div>
-      <button type="button" value="スレッドを作る"  onClick={OnclickButton} >スレッドを作る</button>
+      <button type="button" onClick={OnclickButton} >スレッドを作る</button>
     </div>
   );
 };

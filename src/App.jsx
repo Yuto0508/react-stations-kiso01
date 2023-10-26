@@ -13,6 +13,7 @@ import { BrowserRouter } from "react-router-dom";
 
 export const App = () => {
   return (
+  
     <BrowserRouter>
       <Header />
       <Threader />
@@ -22,6 +23,7 @@ export const App = () => {
         <a href="https://www.google.com/webhp">ホームに戻る</a>
       </div>
       </BrowserRouter>
+    
   );
 };
 
