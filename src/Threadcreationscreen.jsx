@@ -21,6 +21,7 @@ export const Threadcreationscreen = () => {
     };
     console.log(titleJson);
 
+    // fechしたURLを認識するための関数
     const fetchData = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
