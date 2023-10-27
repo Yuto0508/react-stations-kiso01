@@ -15,13 +15,15 @@ export const Threader = () => {
   return (
     <header className="CssComponent2">
       <div className="submit">
-        <a href="url">
-          スレッドを立てる
-        </a>
+        <a href="url">スレッドを立てる</a>
       </div>
-      <div class="example">
-    <img src="https://csshtml.work/wp-content/uploads/cat.jpg" width="200" alt="子猫"/>
-</div>
+      <div className="cat">
+        <img
+          src="https://csshtml.work/wp-content/uploads/cat.jpg"
+          width="200"
+          alt="子猫"
+        />
+      </div>
     </header>
   );
 };

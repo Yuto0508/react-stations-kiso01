@@ -13,17 +13,17 @@ import { BrowserRouter } from "react-router-dom";
 
 export const App = () => {
   return (
-  
-    <BrowserRouter>
-      <Header />
-      <Threader />
-      <Threadcreationscreen />
-      <ThreadList />
-      <div className="Home">
-        <a href="https://www.google.com/webhp">ホームに戻る</a>
-      </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Threader />
+        <Threadcreationscreen />
+        <ThreadList />
+        <div className="Home">
+          <a href="https://www.google.com/webhp">ホームに戻る</a>
+        </div>
       </BrowserRouter>
-    
+    </>
   );
 };
 

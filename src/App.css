@@ -8,7 +8,7 @@
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 3em; /* 高さと文字のサイズを調整 */
 }
 
 .Home {
@@ -25,7 +25,7 @@ h1 {
   font-size: 0.8em;
   position: fixed;
   top: 0px;
-  right: 0px;
+  right: 20px;
 }
 
 .submit {
@@ -47,8 +47,4 @@ h1 {
 .intitle input {
   width: calc(50% - 50px); /* 残りの幅を入力フィールドに割り当てます */
   box-sizing: border-box; /* 幅がボーダーボックス内に収まるようにします */
-}
-
-.example {
-  border: 1px solid #333;
 }
