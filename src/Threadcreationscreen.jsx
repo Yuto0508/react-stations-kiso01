@@ -48,7 +48,8 @@ export const Threadcreationscreen = () => {
 
     // 画面遷移を行う関数
     const move = () => {
-      navigate("/");
+      console.log("aiueo")
+      navigate("/aiueo"); 
     };
     console.log(move);
 
@@ -59,7 +60,9 @@ export const Threadcreationscreen = () => {
       (async () => {
         // 非同期処理を順次実行
         await api();
+        console.log("test");
         move();
+        
         // window.location.href = "http://localhost:3000/";
         // リダイレクト先のURLを設定
       })();
