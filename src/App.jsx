@@ -1,6 +1,7 @@
 import { render } from "@testing-library/react";
 import "./App.css";
 import React from "react";
+import { Link } from 'react-router-dom';
 
 /**
  * @type {() => JSX.Element}
@@ -20,7 +21,7 @@ export const App = () => {
         <Threadcreationscreen />
         <ThreadList />
         <div className="Home">
-          <a href="https://www.google.com/webhp">ホームに戻る</a>
+          <Link to="/">ホームに戻る</Link>
         </div>
       </BrowserRouter>
     </>

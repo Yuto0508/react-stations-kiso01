@@ -1,85 +1,80 @@
-import "./App.css";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import React, { useState } from "react";
 
 export const Threadcreationscreen = () => {
-  const navigate = useNavigate();
-  const [title, setTitle] = useState();
-  const onChange = (a) => {
-    setTitle(a.target.value);
+  const [title, setTitle] = useState("");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [threads, setThreads] = useState([]); // スレッドリストの状態
+
+  const onChange = (event) => {
+    setTitle(event.target.value);
   };
 
-  async function OnclickButton(event) {
-    event.preventDefault(); // フォームのデフォルトの送信を防ぐ
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
     const url =
       "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads";
-    console.log(url);
-
     const titleJson = {
       title: title,
     };
-    console.log(titleJson);
 
-    // fechしたURLを認識するための関数
     const fetchData = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(titleJson),
     };
 
-    // タイトルのバリデーションを行う関数
-    const check = () => {
-      if (title == "") {
-        alert("スレッドタイトルを入力してください");
-        return false;
-        //文字を入力して作ったあと何も入れない状態で押すとfalse。
-      }
-      return true;
-      //文字が入っている場合true。
-    };
-
-    // APIリクエストを送信する非同期関数
-    const api = async () => {
-      console.log(title);
+    try {
       const response = await fetch(url, fetchData);
-      return response.text();
-    };
 
-    // 画面遷移を行う関数
-    const move = () => {
-      console.log("aiueo")
-      navigate("/aiueo"); 
-    };
-    console.log(move);
-
-    // タイトルのバリデーションを実行し、結果を保存
-    const isTitleValid = check();
-    // タイトルが無効な場合は処理を中断
-    if (isTitleValid) {
-      (async () => {
-        // 非同期処理を順次実行
-        await api();
-        console.log("test");
-        move();
-        
-        // window.location.href = "http://localhost:3000/";
-        // リダイレクト先のURLを設定
-      })();
+      if (response.ok) {
+        const newThread = await response.json();
+        setThreads([...threads, newThread]); // 新しいスレッドを追加
+        setIsSubmitted(true); // スレッドの作成が成功したことを設定
+        setTitle(""); // 入力フォームをクリア
+      } else {
+        console.log("APIリクエストが失敗しました");
+      }
+    } catch (error) {
+      console.error("APIリクエスト中にエラーが発生しました", error);
     }
-  }
+  };
 
   return (
-    // スレッドを作るフォーム
     <div className="OnclickButton">
-      <h2> 新着スレッドの作成</h2>
-      <div className="intitle">
-        <label htmlFor="title">▼スレッドタイトルを入力してください。</label>
-        <input id="title" type="text" onChange={onChange} />
-      </div>
-      <button type="button" onClick={OnclickButton}>
-        スレッドを作る
-      </button>
+      <h2>新着スレッドの作成</h2>
+      <form>
+        <div className="intitle">
+          <label htmlFor="title">▼スレッドタイトルを入力してください</label>
+          <input id="title" type="text" value={title} onChange={onChange} />
+        </div>
+        
+        <button type="button" onClick={handleFormSubmit}>
+          スレッドを作る
+        </button>
+      </form>
+
+      {threads.length > 0 && (
+        <div className="ThreadList">
+          <>
+            {threads.map((thread, i) => (
+              <li
+                key={i}
+                style={{
+                  textAlign: "left",
+                  fontSize: "16px",
+                  lineHeight: "1.4",
+                  margin: "8px 0",
+                }}
+              >
+                {thread.title}
+              </li>
+            ))}
+          </>
+        </div>
+      )}
     </div>
   );
 };

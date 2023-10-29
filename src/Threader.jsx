@@ -15,7 +15,7 @@ export const Threader = () => {
   return (
     <header className="CssComponent2">
       <div className="submit">
-        <a href="url">スレッドを立てる</a>
+        <a href="">スレッドを立てる</a>
       </div>
       <div className="cat">
         <img
