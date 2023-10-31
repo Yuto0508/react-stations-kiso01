@@ -30,14 +30,18 @@ export const Threadcreationscreen = () => {
       },
       body: JSON.stringify(titleJson),
     };
+    console.log(titleJson)
 
     try {
       const response = await fetch(url, fetchData);
+      console.log("1")
 
       if (response.ok) {
         // スレッドの作成に成功した場合
         const newThread = await response.json();
         setThreads([...threads, newThread]); // 新しいスレッドを追加
+        console.log("2")
+
         setIsSubmitted(true); // スレッドの作成が成功したことを設定
         setTitle(""); // 入力フォームをクリア
       } else {
@@ -56,6 +60,7 @@ export const Threadcreationscreen = () => {
           <label htmlFor="title">▼スレッドタイトルを入力してください</label>
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
+        
 
         <button type="button" onClick={handleFormButton}>
           スレッドを作る
