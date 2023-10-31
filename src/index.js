@@ -13,7 +13,7 @@ root.render(
 
 async function callApi() {
   const res = await fetch(
-    "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads"
+    "https://railway.bulletinboard.techtrain.dev/threads"
   );
   const users = await res.json();
   console.log(users);

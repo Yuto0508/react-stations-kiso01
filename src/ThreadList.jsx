@@ -8,7 +8,7 @@ export const ThreadList = () => {
 
   async function getThreadList() {
     const url =
-      "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads";
+      "https://railway.bulletinboard.techtrain.dev/threads";
     const getData = await fetch(url, {
       method: "GET",
     });

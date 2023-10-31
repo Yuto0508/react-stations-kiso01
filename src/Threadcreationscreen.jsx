@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 
 export const Threadcreationscreen = () => {
-  const [title, setTitle] = useState("");
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // ステートの初期化
+  const [title, setTitle] = useState(""); // スレッドのタイトル
+  const [isSubmitted, setIsSubmitted] = useState(false); // スレッドの作成が成功したかどうかのステート
   const [threads, setThreads] = useState([]); // スレッドリストの状態
 
+  // 入力フォームの変更ハンドラ
   const onChange = (event) => {
     setTitle(event.target.value);
   };
 
+  // フォームの送信ハンドラ
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    // APIエンドポイント
     const url =
-      "https://2y6i6tqn41.execute-api.ap-northeast-1.amazonaws.com/threads";
+      "https://railway.bulletinboard.techtrain.dev/threads";
     const titleJson = {
       title: title,
     };
 
+    // リクエストデータ
     const fetchData = {
       method: "POST",
       headers: {
@@ -30,6 +35,7 @@ export const Threadcreationscreen = () => {
       const response = await fetch(url, fetchData);
 
       if (response.ok) {
+        // スレッドの作成に成功した場合
         const newThread = await response.json();
         setThreads([...threads, newThread]); // 新しいスレッドを追加
         setIsSubmitted(true); // スレッドの作成が成功したことを設定
@@ -50,7 +56,7 @@ export const Threadcreationscreen = () => {
           <label htmlFor="title">▼スレッドタイトルを入力してください</label>
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
-        
+
         <button type="button" onClick={handleFormSubmit}>
           スレッドを作る
         </button>
