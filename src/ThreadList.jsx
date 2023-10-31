@@ -23,7 +23,7 @@ export const ThreadList = () => {
     // レスポンスからスレッドタイトルとIDを抽出し、一時的な配列に格納
     for (let i = 0; i < response.length; i++) {
       threadArray.push(response[i].title);
-      threadIDArray.push(response[i].id);a
+      threadIDArray.push(response[i].id);
     }
 
     // ステートにデータを設定
