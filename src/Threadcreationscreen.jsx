@@ -12,7 +12,7 @@ export const Threadcreationscreen = () => {
   };
 
   // フォームの送信ハンドラ
-  const handleFormSubmit = async (event) => {
+  const handleFormButton = async (event) => {
     event.preventDefault();
 
     // APIエンドポイント
@@ -57,7 +57,7 @@ export const Threadcreationscreen = () => {
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
 
-        <button type="button" onClick={handleFormSubmit}>
+        <button type="button" onClick={handleFormButton}>
           スレッドを作る
         </button>
       </form>
