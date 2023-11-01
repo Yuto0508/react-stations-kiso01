@@ -1,37 +1,27 @@
-import React, { useState, useEffect } from "react";
+// import React, { useState, useEffect } from "react";
+// import { PostList } from "./PostList"; // PostList コンポーネントをインポート
 
-export const PostList = ({ threadId }) => {
-  const [posts, setPosts] = useState([]);
+// export const ThreadList = () => {
+//   const [threads, setThreads] = useState([]);
+//   const [selectedThread, setSelectedThread] = useState(null); // 選択されたスレッドの情報を管理
 
-  async function getPosts() {
-    const url = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
+//   // スレッド一覧を取得するAPI呼び出し（省略）
 
-    const response = await fetch(url, {
-      method: "GET",
-    });
+//   return (
+//     <div className="ThreadList">
+//       <h2>スレッド一覧</h2>
+//       <ul>
+//         {threads.map((thread) => (
+//           <li key={thread.id} onClick={() => setSelectedThread(thread)}>
+//             {thread.title}
+//           </li>
+//         ))}
+//       </ul>
 
-    if (response.ok) {
-      const postData = await response.json();
-      setPosts(postData);
-    } else {
-      console.log("APIリクエストが失敗しました");
-    }
-  }
-
-  useEffect(() => {
-    getPosts();
-  }, [threadId]);
-
-  return (
-    <div className="postList">
-      <h2>投稿一覧</h2>
-      <ul>
-        {posts.map((post, index) => (
-          <li key={index}>
-            <strong>{post.author}:</strong> {post.content}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+//       {/* PostList コンポーネントを表示 */}
+//       {selectedThread && (
+//         <PostList threadId={selectedThread.id} />
+//       )}
+//     </div>
+//   );
+// };
