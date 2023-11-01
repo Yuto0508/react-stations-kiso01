@@ -10,6 +10,7 @@ import { Header } from "./Header";
 import { Threader } from "./Threader";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
+import { PostList } from "./PostList";
 import { BrowserRouter } from "react-router-dom";
 
 export const App = () => {
