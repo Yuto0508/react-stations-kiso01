@@ -60,7 +60,7 @@ export const Threadcreationscreen = () => {
           <label htmlFor="title">▼スレッドタイトルを入力してください</label>
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
-        
+
 
         <button type="button" onClick={handleFormButton}>
           スレッドを作る
