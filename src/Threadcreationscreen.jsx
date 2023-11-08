@@ -90,3 +90,5 @@ export const Threadcreationscreen = () => {
     </div>
   );
 };
+
+export default Threadcreationscreen;

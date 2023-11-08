@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 import "./App.css";
-import React from "react";
-import { Link } from 'react-router-dom';
 
+import React from "react";
+import { Link, Route, Routes, BrowserRouter } from "react-router-dom";
 
 /**
  * @type {() => JSX.Element}
@@ -11,20 +11,39 @@ import { Header } from "./Header";
 import { Threader } from "./Threader";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
-import { BrowserRouter } from "react-router-dom";
+
 
 export const App = () => {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basebame="/app">
         <Header />
-        <Threader />
-        <Threadcreationscreen />
-        <ThreadList />
-        <div className="Home">
-          <Link to="/">ホームに戻る</Link>
-        </div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">ホーム</Link>
+            </li>
+            <li>
+              <Link to="/threader">スレッド一覧</Link>
+            </li>
+            <li>
+              <Link to="/TreadList">スレッド一覧</Link>
+            </li>
+          </ul>
+          </nav>
+
+          <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/Thread" element={<Threader />} />
+          <Route path="/ThreadList " element={<ThreadList  />} />
+
+         
+
+          <Route path="/thread/new" element={<Threadcreationscreen />} />
+          {/* 新規スレッド作成画面 */}
+        </Routes>
       </BrowserRouter>
+
     </>
   );
 };
