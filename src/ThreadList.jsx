@@ -16,6 +16,7 @@ export const ThreadList = () => {
     const getData = await fetch(url, {
       method: "GET",
     });
+    console.log("○")
 
     // レスポンスデータをJSON形式に変換
     const response = await getData.json();

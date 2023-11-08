@@ -44,6 +44,7 @@ export const Threadcreationscreen = () => {
 
         setIsSubmitted(true); // スレッドの作成が成功したことを設定
         setTitle(""); // 入力フォームをクリア
+        console.log("3")
       } else {
         console.log("APIリクエストが失敗しました");
       }
