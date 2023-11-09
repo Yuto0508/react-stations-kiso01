@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Header } from "./Header";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Threadcreationscreen = () => {
   // ステートの初期化
   const [title, setTitle] = useState(""); // スレッドのタイトル
   const [isSubmitted, setIsSubmitted] = useState(false); // スレッドの作成が成功したかどうかのステート
   const [threads, setThreads] = useState([]); // スレッドリストの状態
+  const navigate = useNavigate(); // useNavigate フックを使用して画面遷移を行うための関数を取得
 
   // 入力フォームの変更ハンドラ
   const onChange = (event) => {
@@ -46,6 +46,8 @@ export const Threadcreationscreen = () => {
         setIsSubmitted(true); // スレッドの作成が成功したことを設定
         setTitle(""); // 入力フォームをクリア
         console.log("3");
+
+        navigate("/"); // "/" は遷移先のパスに置き換えてください
       } else {
         console.log("APIリクエストが失敗しました");
       }
@@ -63,12 +65,9 @@ export const Threadcreationscreen = () => {
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
 
-        <button type="button" onClick={handleFormButton}>
-          <Link to="/"> スレッド作成</Link>
-          </button>
-          <br></br>
-          <button type="button2" onClick={handleFormButton}>
-          <Link to="/"> Top</Link>
+        <button type="button" onClick={() => navigate("/")}>
+          {/* 作成ボタンを押すとスレッド一覧画面(Home)に遷移 */}
+          スレッド作成
         </button>
       </form>
 
