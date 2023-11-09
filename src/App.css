@@ -11,11 +11,19 @@ h1 {
   font-size: 3em; /* 高さと文字のサイズを調整 */
 }
 
-.Home {
-  font-size: 1.4em;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+h2{
+  text-align: center;  /* タイトルタグのテキストを中央に寄せる */
+}
+
+/* スレッドリストのスタイル */
+.newThreadList {
+  text-align: center; /* リスト内のテキストを中央に寄せる */
+}
+
+/* <li> 要素のスタイル */
+.newThreadList  {
+  width: 200px;
+  margin: auto;
 }
 
 .CssComponent2 {

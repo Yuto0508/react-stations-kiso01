@@ -20,30 +20,30 @@ export const App = () => {
         <Header />
         <nav>
           <ul>
+            {/* <li>
+              <Link to="/">ホーム</Link>
+            </li> */}
             <li>
               <Link to="/">ホーム</Link>
             </li>
             <li>
               <Link to="/threader">スレッド一覧</Link>
             </li>
-            <li>
-              <Link to="/TreadList">スレッド一覧</Link>
-            </li>
+            {/* <li>
+              <Link to="/ThreadList">スレッド一覧2</Link>
+            </li> */}
           </ul>
-          </nav>
+        </nav>
 
-          <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/Thread" element={<Threader />} />
-          <Route path="/ThreadList " element={<ThreadList  />} />
-
-         
+        <Routes>
+          <Route path="/" element={<ThreadList />} />
+          {/* ホーム画面(スレッド新着画面) */}
+          <Route path="/threader" element={<Threader />} />
 
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
         </Routes>
       </BrowserRouter>
-
     </>
   );
 };
