@@ -22,7 +22,7 @@ const Threader = ({ threadId }) => {
     <div className="Postlist">
       <h2>投稿一覧</h2>
       <ul>
-        {posts.map((post, i) => (
+        {Object.values(posts).map((post, i) => (
           <li key={i}>
             <p>{post.content}</p>
             <p>投稿者: {post.author}</p>
