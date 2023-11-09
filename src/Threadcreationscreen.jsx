@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 export const Threadcreationscreen = () => {
   // ステートの初期化
@@ -48,6 +49,7 @@ export const Threadcreationscreen = () => {
         console.log("3");
 
         navigate("/"); // "/" は遷移先のパスに置き換えてください
+        console.log("4");
       } else {
         console.log("APIリクエストが失敗しました");
       }
@@ -65,9 +67,13 @@ export const Threadcreationscreen = () => {
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
 
-        <button type="button" onClick={() => navigate("/")}>
-          {/* 作成ボタンを押すとスレッド一覧画面(Home)に遷移 */}
+        <button type="button" onClick={handleFormButton}>
           スレッド作成
+          </button>
+          
+          <br></br>
+          <button type="button" onClick={() => navigate("/")}>
+          Top
         </button>
       </form>
 

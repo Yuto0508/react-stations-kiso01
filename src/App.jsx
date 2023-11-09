@@ -17,7 +17,7 @@ export const App = () => {
     <>
       <BrowserRouter basebame="/app">
         <Header />
-        <nav>
+        
           <ul>
             {/* <li>
               <Link to="/">ホーム</Link>
@@ -26,7 +26,7 @@ export const App = () => {
               <Link to="/threade">スレッド一覧</Link>
             </li>
           </ul>
-        </nav>
+        
 
         <Routes>
           <Route path="/" element={<ThreadList />} />
