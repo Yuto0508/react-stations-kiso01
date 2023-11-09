@@ -11,8 +11,8 @@ h1 {
   font-size: 3em; /* 高さと文字のサイズを調整 */
 }
 
-h2{
-  text-align: center;  /* タイトルタグのテキストを中央に寄せる */
+h2 {
+  text-align: center; /* タイトルタグのテキストを中央に寄せる */
 }
 
 /* スレッドリストのスタイル */
@@ -21,7 +21,7 @@ h2{
 }
 
 /* <li> 要素のスタイル */
-.newThreadList  {
+.newThreadList {
   width: 200px;
   margin: auto;
 }

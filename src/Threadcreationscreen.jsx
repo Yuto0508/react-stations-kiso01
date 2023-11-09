@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Header } from "./Header";
 
 export const Threadcreationscreen = () => {
   // ステートの初期化
@@ -16,8 +18,7 @@ export const Threadcreationscreen = () => {
     event.preventDefault();
 
     // APIエンドポイント
-    const url =
-      "https://railway.bulletinboard.techtrain.dev/threads";
+    const url = "https://railway.bulletinboard.techtrain.dev/threads";
     const titleJson = {
       title: title,
     };
@@ -30,21 +31,21 @@ export const Threadcreationscreen = () => {
       },
       body: JSON.stringify(titleJson),
     };
-    console.log(titleJson)
+    console.log(titleJson);
 
     try {
       const response = await fetch(url, fetchData);
-      console.log("1")
+      console.log("1");
 
       if (response.ok) {
         // スレッドの作成に成功した場合
         const newThread = await response.json();
         setThreads([...threads, newThread]); // 新しいスレッドを追加
-        console.log("2")
+        console.log("2");
 
         setIsSubmitted(true); // スレッドの作成が成功したことを設定
         setTitle(""); // 入力フォームをクリア
-        console.log("3")
+        console.log("3");
       } else {
         console.log("APIリクエストが失敗しました");
       }
@@ -62,9 +63,12 @@ export const Threadcreationscreen = () => {
           <input id="title" type="text" value={title} onChange={onChange} />
         </div>
 
-
         <button type="button" onClick={handleFormButton}>
-          スレッドを作る
+          <Link to="/"> スレッド作成</Link>
+          </button>
+          <br></br>
+          <button type="button2" onClick={handleFormButton}>
+          <Link to="/"> Top</Link>
         </button>
       </form>
 

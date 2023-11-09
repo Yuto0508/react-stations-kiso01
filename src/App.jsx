@@ -12,7 +12,6 @@ import { Threader } from "./Threader";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
 
-
 export const App = () => {
   return (
     <>
@@ -24,21 +23,15 @@ export const App = () => {
               <Link to="/">ホーム</Link>
             </li> */}
             <li>
-              <Link to="/">ホーム</Link>
+              <Link to="/threade">スレッド一覧</Link>
             </li>
-            <li>
-              <Link to="/threader">スレッド一覧</Link>
-            </li>
-            {/* <li>
-              <Link to="/ThreadList">スレッド一覧2</Link>
-            </li> */}
           </ul>
         </nav>
 
         <Routes>
           <Route path="/" element={<ThreadList />} />
-          {/* ホーム画面(スレッド新着画面) */}
-          <Route path="/threader" element={<Threader />} />
+          {/* スレッド一覧画面(スレッド新着の画面) */}
+          <Route path="/threade" element={<Threader />} />
 
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
