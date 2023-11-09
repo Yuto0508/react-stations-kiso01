@@ -1,31 +1,50 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const Post = ({ threadId, onMessagePosted }) => {
-  const [newPostContent, setNewPostContent] = useState(""); // 新しいメッセージの内容
+const Post = () => {
+  const { threadId } = useParams();
+  const [posts, setPosts] = useState([]);
+  const [newPostContent, setNewPostContent] = useState("");
+
+  useEffect(() => {
+    // スレッド内のメッセージを取得する関数
+    async function fetchPosts() {
+      try {
+        const response = await fetch(`/api/threads/${threadId}/posts`);
+        if (response.ok) {
+          const data = await response.json();
+          setPosts(data);
+        } else {
+          console.error("APIリクエストが失敗しました");
+        }
+      } catch (error) {
+        console.error("APIリクエスト中にエラーが発生しました", error);
+      }
+    }
+
+    fetchPosts();
+  }, [threadId]);
 
   const handlePostMessage = async () => {
-    // 新しいメッセージの内容を投稿
-    const url = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
+    // メッセージを投稿するための関数
     const newPostData = {
       content: newPostContent,
       // 他の必要なデータを追加
     };
 
-    const fetchData = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPostData),
-    };
-
     try {
-      const response = await fetch(url, fetchData);
+      const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPostData),
+      });
+
       if (response.ok) {
-        // メッセージが正常に投稿された場合
         const newPost = await response.json();
-        onMessagePosted(newPost); // 親コンポーネントに新しいメッセージを通知
-        setNewPostContent(""); // 投稿内容をクリア
+        setPosts([...posts, newPost]);
+        setNewPostContent("");
       } else {
         console.error("メッセージの投稿に失敗しました");
       }
@@ -35,14 +54,27 @@ const Post = ({ threadId, onMessagePosted }) => {
   };
 
   return (
-    <div className="MessageForm">
-      <h3>新しいメッセージを投稿</h3>
-      <textarea
-        value={newPostContent}
-        onChange={(e) => setNewPostContent(e.target.value)}
-        placeholder="スレッドを投稿入力する"
-      />
-      <button onClick={handlePostMessage}>投稿</button>
+    <div>
+      <h2>投稿一覧</h2>
+      <ul>
+        {posts.map((post, i) => (
+          <li key={i}>
+            <p>{post.content}</p>
+            <p>投稿者: {post.author}</p>
+            <p>投稿日時: {post.timestamp}</p>
+          </li>
+        ))}
+      </ul>
+
+      <div>
+        <h3>新しいメッセージを投稿</h3>
+        <textarea
+          value={newPostContent}
+          onChange={(e) => setNewPostContent(e.target.value)}
+          placeholder="投稿してください"
+        />
+        <button onClick={handlePostMessage}>投稿</button>
+      </div>
     </div>
   );
 };
