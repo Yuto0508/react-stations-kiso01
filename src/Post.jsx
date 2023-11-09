@@ -10,7 +10,7 @@ const Post = () => {
     // スレッド内のメッセージを取得する関数
     async function fetchPosts() {
       try {
-        const response = await fetch(`/api/threads/${threadId}/posts`);
+        const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`);
         if (response.ok) {
           const data = await response.json();
           setPosts(data);
@@ -34,7 +34,7 @@ const Post = () => {
 
     try {
       const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
-        method: "POST",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
@@ -57,7 +57,7 @@ const Post = () => {
     <div>
       <h2>投稿一覧</h2>
       <ul>
-        {posts.map((post, i) => (
+        {Object.values(posts).map((post, i) => (
           <li key={i}>
             <p>{post.content}</p>
             <p>投稿者: {post.author}</p>
