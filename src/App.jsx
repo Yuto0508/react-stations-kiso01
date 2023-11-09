@@ -8,7 +8,7 @@ import { Link, Route, Routes, BrowserRouter } from "react-router-dom";
  * @type {() => JSX.Element}
  */
 import { Header } from "./Header";
-import { Threader } from "./Threader";
+import  Threader  from "./Threader";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
 
@@ -19,9 +19,6 @@ export const App = () => {
         <Header />
         
           <ul>
-            {/* <li>
-              <Link to="/">ホーム</Link>
-            </li> */}
             <li>
               <Link to="/thread/:thread_id">スレッド一覧</Link>
             </li>
@@ -31,10 +28,12 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<ThreadList />} />
           {/* スレッド一覧画面(スレッド新着の画面) */}
-          <Route path="/thread/:thread_id" element={<Threader />} />
 
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
+
+          <Route path="/thread/:thread_id" element={<Threader />} />
+
         </Routes>
       </BrowserRouter>
     </>

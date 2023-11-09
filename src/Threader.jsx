@@ -1,38 +1,37 @@
 import React, { useState, useEffect } from "react";
 
-export const Threader = () => {
-  const [threads, setThreads] = useState([]); // スレッドのデータを保持するステート
+const Threader = ({ threadId }) => {
+  const [posts, setPosts] = useState([]);
 
-  // スレッドのデータをAPIから取得する非同期関数
-  const fetchThreads = async () => {
-    try {
-      const response = await fetch(
-        "https://railway.bulletinboard.techtrain.dev/thread"
-      );
+  useEffect(() => {
+    // 特定のスレッド内の投稿を取得するためのAPI呼び出し
+    async function getPostsInThread() {
+      const url = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
+      const response = await fetch(url);
       if (response.ok) {
         const data = await response.json();
-        setThreads(data); // 取得したデータをステートに設定
+        setPosts(data);
       } else {
         console.error("APIリクエストが失敗しました");
       }
-    } catch (error) {
-      console.error("APIリクエスト中にエラーが発生しました", error);
     }
-  };
-
-  // ページが読み込まれた際にスレッドデータを取得
-  useEffect(() => {
-    fetchThreads();
-  }, []);
+    getPostsInThread();
+  }, [threadId]);
 
   return (
-    <div>
-      <h2>スレッド一覧</h2>
+    <div className="Postlist">
+      <h2>投稿一覧</h2>
       <ul>
-        {threads.map((thread) => (
-          <li key={thread.id}>{thread.title}</li>
+        {posts.map((post, i) => (
+          <li key={i}>
+            <p>{post.content}</p>
+            <p>投稿者: {post.author}</p>
+            <p>投稿日時: {post.timestamp}</p>
+          </li>
         ))}
       </ul>
     </div>
   );
 };
+
+export default Threader;
