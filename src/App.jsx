@@ -8,9 +8,9 @@ import { Link, Route, Routes, BrowserRouter } from "react-router-dom";
  * @type {() => JSX.Element}
  */
 import { Header } from "./Header";
-import  Threader  from "./Threader";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
+import  Post  from "./Post";
 
 export const App = () => {
   return (
@@ -32,7 +32,7 @@ export const App = () => {
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
 
-          <Route path="/thread/:thread_id" element={<Threader />} />
+          <Route path="/thread/:thread_id" element={<Post />} />
 
         </Routes>
       </BrowserRouter>

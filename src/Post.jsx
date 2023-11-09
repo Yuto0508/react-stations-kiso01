@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Threader = ({ threadId }) => {
+const Post = ({ threadId }) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -34,4 +34,4 @@ const Threader = ({ threadId }) => {
   );
 };
 
-export default Threader;
+export default Post;
