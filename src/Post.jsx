@@ -12,7 +12,7 @@ const Post = ({ threadId, onMessagePosted }) => {
     };
 
     const fetchData = {
-      method: "POST",
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },

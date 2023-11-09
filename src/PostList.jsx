@@ -1,5 +1,3 @@
-// PostList.js
-
 import React, { useState, useEffect } from "react";
 
 const PostList = ({ threadId }) => {
