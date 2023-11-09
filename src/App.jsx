@@ -10,7 +10,8 @@ import { Link, Route, Routes, BrowserRouter } from "react-router-dom";
 import { Header } from "./Header";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
-import  Post  from "./Post";
+import   Post   from "./Post";
+import   PostList   from "./PostList";
 
 export const App = () => {
   return (
@@ -22,6 +23,10 @@ export const App = () => {
             <li>
               <Link to="/thread/:thread_id">スレッド一覧</Link>
             </li>
+
+            <li>
+              <Link to="/thread/:thread_id/post">メッセージ投稿フォーム</Link>
+            </li>
           </ul>
         
 
@@ -32,7 +37,9 @@ export const App = () => {
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
 
-          <Route path="/thread/:thread_id" element={<Post />} />
+          <Route path="/thread/:thread_id" element={<PostList />} />
+
+          <Route path="/thread/:thread_id/post" element={<Post />} />
 
         </Routes>
       </BrowserRouter>

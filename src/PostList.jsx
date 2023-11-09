@@ -1,50 +1,38 @@
-import React, { useState } from "react";
+// PostList.js
 
-const PostList = ({ threadId, onMessagePosted }) => {
-  const [newPostContent, setNewPostContent] = useState(""); // 新しいメッセージの内容
+import React, { useState, useEffect } from "react";
 
-  const handlePostMessage = async () => {
-    // 新しいメッセージの内容を投稿
-    const url = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
-    const newPostData = {
-      content: newPostContent,
-      // 他の必要なデータを追加
-    };
+const PostList = ({ threadId }) => {
+  const [posts, setPosts] = useState([]);
 
-    const fetchData = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newPostData),
-    };
-
-    try {
-      const response = await fetch(url, fetchData);
+  useEffect(() => {
+    // 特定のスレッド内の投稿を取得するためのAPI呼び出し
+    async function getPostsInThread() {
+      const url = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
+      const response = await fetch(url);
       if (response.ok) {
-        // メッセージが正常に投稿された場合
-        const newPost = await response.json();
-        onMessagePosted(newPost); // 親コンポーネントに新しいメッセージを通知
-        setNewPostContent(""); // 投稿内容をクリア
+        const data = await response.json();
+        setPosts(data);
       } else {
-        console.error("メッセージの投稿に失敗しました");
+        console.error("APIリクエストが失敗しました");
       }
-    } catch (error) {
-      console.error("APIリクエスト中にエラーが発生しました", error);
     }
-  };
+    getPostsInThread();
+  }, [threadId]);
 
   return (
-    <div className="MessageForm">
-      <h3>新しいメッセージを投稿</h3>
-      <textarea
-        value={newPostContent}
-        onChange={(e) => setNewPostContent(e.target.value)}
-        placeholder="メッセージを入力してください"
-      />
-      <button onClick={handlePostMessage}>投稿</button>
+    <div className="Postlist">
+      <h2>投稿一覧</h2>
+      <ul>
+        {Object.values(posts).map((post, i) => (
+          <li key={i}>
+            <p>{post.content}</p>
+            <p>投稿者: {post.author}</p>
+            <p>投稿日時: {post.timestamp}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 };
-
 export default PostList;
