@@ -17,6 +17,11 @@ export const Threadcreationscreen = () => {
   // フォームの送信ハンドラ
   const handleFormButton = async (event) => {
     event.preventDefault();
+    if (title.trim().length < 3) {
+      // タイトルが3文字未満の場合、画面遷移を行わない
+      alert("スレッドタイトルは3文字以上必要です。");
+      return;
+    }
 
     // APIエンドポイント
     const url = "https://railway.bulletinboard.techtrain.dev/threads";
@@ -73,7 +78,7 @@ export const Threadcreationscreen = () => {
           
           <br></br>
           <button type="button" onClick={() => navigate("/")}>
-          Top
+          Topに戻る
         </button>
       </form>
 

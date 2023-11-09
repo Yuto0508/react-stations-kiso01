@@ -23,7 +23,7 @@ export const App = () => {
               <Link to="/">ホーム</Link>
             </li> */}
             <li>
-              <Link to="/threade">スレッド一覧</Link>
+              <Link to="/thread/:thread_id">スレッド一覧</Link>
             </li>
           </ul>
         
@@ -31,7 +31,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<ThreadList />} />
           {/* スレッド一覧画面(スレッド新着の画面) */}
-          <Route path="/threade" element={<Threader />} />
+          <Route path="/thread/:thread_id" element={<Threader />} />
 
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
