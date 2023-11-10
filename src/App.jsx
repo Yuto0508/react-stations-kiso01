@@ -20,9 +20,9 @@ export const App = () => {
         <Header />
         
           <ul>
-            <li>
+            {/* <li>
               <Link to="/thread/:thread_id">スレッド一覧</Link>
-            </li>
+            </li> */}
 
             {/* <li>
               <Link to="/thread/:thread_id/post">メッセージ投稿フォーム</Link>

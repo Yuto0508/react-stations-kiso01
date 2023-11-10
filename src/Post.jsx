@@ -1,81 +1,110 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const Post = () => {
-  const { threadId } = useParams();
-  const [posts, setPosts] = useState([]);
-  const [newPostContent, setNewPostContent] = useState("");
+// Postコンポーネントを定義
+export const Post = () => {
+  // 画面遷移用の関数を取得
+  const navigate = useNavigate();
+  // 現在のロケーション情報を取得
+  const location = useLocation();
+  // スレッドのIDとタイトルを取得
+  const { id, title } = location.state || { id: "", title: "" };
+  // 新しいコメントの内容を格納するステート
+  const [comment, setComment] = useState("");
+  // 投稿の詳細データを格納するステート
+  const [detailData, setDetailData] = useState({
+    threadId: "threadId",
+    posts: []
+  });
+  // 投稿が完了したかどうかを示すフラグ
+  const [postComplete, setPostComplete] = useState(false);
 
-  useEffect(() => {
-    // スレッド内のメッセージを取得する関数
-    async function fetchPosts() {
-      try {
-        const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`);
-        if (response.ok) {
-          const data = await response.json();
-          setPosts(data);
-        } else {
-          console.error("APIリクエストが失敗しました");
-        }
-      } catch (error) {
-        console.error("APIリクエスト中にエラーが発生しました", error);
-      }
-    }
+  // テキスト入力フィールドの変更時に呼び出され、新しいコメントの内容を更新
+  const handleChange = (e) => setComment(e.target.value);
 
-    fetchPosts();
-  }, [threadId]);
+  // スレッドの詳細情報を取得するAPIエンドポイントのURL
+  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/{threadId}/posts`;
+  // コメントを投稿するAPIエンドポイントのURL
+  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/{threadId}/posts`;
 
-  const handlePostMessage = async () => {
-    // メッセージを投稿するための関数
-    const newPostData = {
-      content: newPostContent,
-      // 他の必要なデータを追加
-    };
+  // コメントを投稿する関数
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
 
-    try {
-      const response = await fetch(`https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newPostData),
+    axios
+      .post(postCommentUrl, { content: comment }) // コメントの内容をボディに設定
+      .then((response) => {
+        setPostComplete(true);
+
+        axios
+          .get(threadDetailUrl)
+          .then((response) => {
+            const data = response.data;
+            setDetailData(data);
+          })
+          .catch((error) => {
+            console.error("APIリクエストエラー:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("APIリクエストエラー", error);
       });
-
-      if (response.ok) {
-        const newPost = await response.json();
-        setPosts([...posts, newPost]);
-        setNewPostContent("");
-      } else {
-        console.error("メッセージの投稿に失敗しました");
-      }
-    } catch (error) {
-      console.error("APIリクエスト中にエラーが発生しました", error);
-    }
   };
 
-  return (
-    <div>
-      <h2>投稿一覧</h2>
-      <ul>
-        {Object.values(posts).map((post, i) => (
-          <li key={i}>
-            <p>{post.content}</p>
-            <p>投稿者: {post.author}</p>
-            <p>投稿日時: {post.timestamp}</p>
-          </li>
-        ))}
-      </ul>
+  // コンポーネントがレンダリング後に、スレッドの詳細情報を取得
+  useEffect(() => {
+    axios
+      .get(threadDetailUrl)
+      .then((response) => {
+        const data = response.data;
+        setDetailData(data);
+      })
+      .catch((error) => {
+        console.error("APIリクエストエラー:", error);
+      });
+  }, [threadDetailUrl]);
 
+  // コンポーネントのレンダリング
+  return (
+    <form onSubmit={handleCommentSubmit}>
       <div>
-        <h3>新しいメッセージを投稿</h3>
-        <textarea
-          value={newPostContent}
-          onChange={(e) => setNewPostContent(e.target.value)}
-          placeholder="投稿してください"
+        <h3>title: {title}</h3>
+        <p>id: {id}</p>
+        <input
+          id="newComment"
+          value={comment}
+          type="text"
+          size="50"
+          placeholder="内容を記載してください"
+          onChange={handleChange}
         />
-        <button onClick={handlePostMessage}>投稿</button>
+
+        {/* コメント一覧の表示 */}
+        {detailData.posts && detailData.posts.length > 0 && (
+          <table>
+            <tbody>
+              {detailData.posts.map((post) => (
+                <tr key={post.id}>
+                  <td>{post.content}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+
+        <div>
+          <button className="row-button">投稿</button>
+          <button className="row-button" onClick={() => navigate("/")}>
+            戻る
+          </button>
+        </div>
+
+        {/* 投稿が完了した場合に成功メッセージを表示 */}
+        {postComplete && <p>コメントを投稿しました</p>}
       </div>
-    </div>
+    </form>
   );
 };
 
