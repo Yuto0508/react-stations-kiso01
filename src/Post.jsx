@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Postコンポーネントを定義
 export const Post = () => {
@@ -26,52 +24,53 @@ export const Post = () => {
   const handleChange = (e) => setComment(e.target.value);
 
   const params = useParams();
-  // console.log("a");
-
   const threadId = params.id || "threadId";
-  // useParams()からidを取得
-  // idが存在しない場合、デフォルトの値を使用
 
   // スレッドの詳細情報を取得するAPIエンドポイントのURL
-  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20`;
+  const threadDetailUrl = "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20";
   // コメントを投稿するAPIエンドポイントのURL
-  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
+  const postCommentUrl = "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts";
 
   // コメントを投稿する関数
-  const handleCommentSubmit = (e) => {
+  const handleCommentSubmit = async (e) => {
     e.preventDefault();
 
-    axios
-      .post(postCommentUrl, { content: comment }) // コメントの内容をボディに設定
-      .then(() => {
+    try {
+      const response = await fetch(postCommentUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content: comment }),
+      });
+
+      if (response.ok) {
         setPostComplete(true);
 
-        axios
-          .get(threadDetailUrl)
-          .then((response) => {
-            const data = response.data;
-            setDetailData(data);
-          })
-          .catch((error) => {
-            console.error("APIリクエストエラー:", error);
-          });
-      })
-      .catch((error) => {
-        console.error("APIリクエストエラー", error);
-      });
+        const detailResponse = await fetch(threadDetailUrl);
+        const detailData = await detailResponse.json();
+        setDetailData(detailData);
+      } else {
+        console.error("メッセージの投稿に失敗しました");
+      }
+    } catch (error) {
+      console.error("APIリクエストエラー", error);
+    }
   };
 
   // コンポーネントがレンダリング後に、スレッドの詳細情報を取得
   useEffect(() => {
-    axios
-      .get(threadDetailUrl)
-      .then((response) => {
-        const data = response.data;
+    const fetchDetailData = async () => {
+      try {
+        const response = await fetch(threadDetailUrl);
+        const data = await response.json();
         setDetailData(data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("APIリクエストエラー:", error);
-      });
+      }
+    };
+
+    fetchDetailData();
   }, [threadDetailUrl]);
 
   // コンポーネントのレンダリング

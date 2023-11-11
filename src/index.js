@@ -51,7 +51,7 @@ async function callApi() {
 
 async function callApi2() {
   const res = await fetch(
-    "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20"
+    "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts"
   );
   const users = await res.json();
   console.log(users);
