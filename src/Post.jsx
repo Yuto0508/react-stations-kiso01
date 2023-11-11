@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 // Postコンポーネントを定義
@@ -16,7 +17,7 @@ export const Post = () => {
   // 投稿の詳細データを格納するステート
   const [detailData, setDetailData] = useState({
     threadId: "threadId",
-    posts: []
+    posts: [],
   });
   // 投稿が完了したかどうかを示すフラグ
   const [postComplete, setPostComplete] = useState(false);
@@ -24,10 +25,17 @@ export const Post = () => {
   // テキスト入力フィールドの変更時に呼び出され、新しいコメントの内容を更新
   const handleChange = (e) => setComment(e.target.value);
 
+  const params = useParams();
+  // console.log("a");
+
+  const threadId = params.id || "threadId";
+  // useParams()からidを取得
+  // idが存在しない場合、デフォルトの値を使用
+
   // スレッドの詳細情報を取得するAPIエンドポイントのURL
-  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/{threadId}/posts`;
+  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20`;
   // コメントを投稿するAPIエンドポイントのURL
-  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/{threadId}/posts`;
+  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
 
   // コメントを投稿する関数
   const handleCommentSubmit = (e) => {
@@ -35,7 +43,7 @@ export const Post = () => {
 
     axios
       .post(postCommentUrl, { content: comment }) // コメントの内容をボディに設定
-      .then((response) => {
+      .then(() => {
         setPostComplete(true);
 
         axios
@@ -70,8 +78,8 @@ export const Post = () => {
   return (
     <form onSubmit={handleCommentSubmit}>
       <div>
-        <h3>title: {title}</h3>
-        <p>id: {id}</p>
+        <h3>title:確認用テスト {title}</h3>
+        <p>id:d0a27191-6aa9-4004-8c88-ca3d2b042e3 {id}</p>
         <input
           id="newComment"
           value={comment}

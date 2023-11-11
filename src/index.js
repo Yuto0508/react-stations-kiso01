@@ -4,11 +4,40 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ThreadList } from "./ThreadList";
+import { Threadcreationscreen } from "./Threadcreationscreen";
+import   Post   from "./Post";
+import Home from "./Home";
+import {  Link,Route, Routes, BrowserRouter } from "react-router-dom";
+import { Header } from "./Header";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    
+    <BrowserRouter basebame="/app">
+    <Header />
+    <ul>
+            <li>
+              <Link to="/Home">Home</Link>
+            </li>
+            {/* <li>
+              <Link to="/thread/:thread_id/post">メッセージ投稿フォーム</Link>
+            </li> */}
+          </ul>
+    <Routes>
+          <Route path="/" element={<ThreadList />} />
+          {/* スレッド一覧画面(スレッド新着の画面) */}
+
+          <Route path="/thread/new" element={<Threadcreationscreen />} />
+          {/* 新規スレッド作成画面 */}
+
+          {/* <Route path="/thread/:thread_id" element={<PostList />} /> */}
+          <Route path="/Home" element={<Home />} />
+
+          <Route path="/thread/:thread_id" element={<Post />} />
+        </Routes>
+      </BrowserRouter>
   </React.StrictMode>
 );
 
@@ -22,7 +51,7 @@ async function callApi() {
 
 async function callApi2() {
   const res = await fetch(
-    "https://railway.bulletinboard.techtrain.dev/threads/{threadId}/posts"
+    "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20"
   );
   const users = await res.json();
   console.log(users);
@@ -33,4 +62,4 @@ async function callApi2() {
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 callApi();
-callApi2().catch(console.error);
+callApi2();
