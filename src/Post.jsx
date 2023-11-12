@@ -27,9 +27,9 @@ export const Post = () => {
   const threadId = params.id || "threadId";
 
   // スレッドの詳細情報を取得するAPIエンドポイントのURL
-  const threadDetailUrl = "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20";
+  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20`;
   // コメントを投稿するAPIエンドポイントのURL
-  const postCommentUrl = "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts";
+  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
 
   // コメントを投稿する関数
   const handleCommentSubmit = async (e) => {

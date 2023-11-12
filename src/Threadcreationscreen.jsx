@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 export const Threadcreationscreen = () => {
   // ステートの初期化
   const [title, setTitle] = useState(""); // スレッドのタイトル
-  const [isSubmitted, setIsSubmitted] = useState(false); // スレッドの作成が成功したかどうかのステート
-  const [threads, setThreads] = useState([]); // スレッドリストの状態
+ 
+  
   const navigate = useNavigate(); // useNavigate フックを使用して画面遷移を行うための関数を取得
 
   // 入力フォームの変更ハンドラ
@@ -45,16 +44,9 @@ export const Threadcreationscreen = () => {
 
       if (response.ok) {
         // スレッドの作成に成功した場合
-        const newThread = await response.json();
-        setThreads([...threads, newThread]); // 新しいスレッドを追加
-        console.log("2");
-
-        setIsSubmitted(true); // スレッドの作成が成功したことを設定
-        setTitle(""); // 入力フォームをクリア
-        console.log("3");
 
         navigate("/"); // "/" は遷移先のパスに置き換えてください
-        console.log("4");
+        console.log("2");
       } else {
         console.log("APIリクエストが失敗しました");
       }
@@ -69,38 +61,24 @@ export const Threadcreationscreen = () => {
       <form>
         <div className="intitle">
           <label htmlFor="title">▼スレッドタイトルを入力してください</label>
-          <input id="title" type="text" placeholder="スレッドタイトルを入力" value={title} onChange={onChange} />
+          <input
+            id="title"
+            type="text"
+            placeholder="スレッドタイトルを入力"
+            value={title}
+            onChange={onChange}
+          />
         </div>
 
         <button type="button" onClick={handleFormButton}>
           スレッド作成
-          </button>
-          
-          <br></br>
-          <button type="button" onClick={() => navigate("/")}>
+        </button>
+
+        <br></br>
+        <button type="button" onClick={() => navigate("/")}>
           Topに戻る
         </button>
       </form>
-
-      {threads.length > 0 && (
-        <div className="ThreadList">
-          <>
-            {threads.map((thread, i) => (
-              <li
-                key={i}
-                style={{
-                  textAlign: "left",
-                  fontSize: "16px",
-                  lineHeight: "1.4",
-                  margin: "8px 0",
-                }}
-              >
-                {thread.title}
-              </li>
-            ))}
-          </>
-        </div>
-      )}
     </div>
   );
 };

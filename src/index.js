@@ -21,9 +21,7 @@ root.render(
             <li>
               <Link to="/Home">Home</Link>
             </li>
-            {/* <li>
-              <Link to="/thread/:thread_id/post">メッセージ投稿フォーム</Link>
-            </li> */}
+            
           </ul>
     <Routes>
           <Route path="/" element={<ThreadList />} />
@@ -32,7 +30,7 @@ root.render(
           <Route path="/thread/new" element={<Threadcreationscreen />} />
           {/* 新規スレッド作成画面 */}
 
-          {/* <Route path="/thread/:thread_id" element={<PostList />} /> */}
+          
           <Route path="/Home" element={<Home />} />
 
           <Route path="/thread/:thread_id" element={<Post />} />
@@ -51,15 +49,12 @@ async function callApi() {
 
 async function callApi2() {
   const res = await fetch(
-    "https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts"
+    "https://railway.bulletinboard.techtrain.dev/threads/${id}/posts"
   );
   const users = await res.json();
   console.log(users);
 }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
 callApi();
 callApi2();
