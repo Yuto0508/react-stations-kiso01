@@ -23,13 +23,15 @@ export const Post = () => {
   // テキスト入力フィールドの変更時に呼び出され、新しいコメントの内容を更新
   const handleChange = (e) => setComment(e.target.value);
 
-  const params = useParams();
-  const threadId = params.id || "threadId";
+  const { thread_id } = useParams();
+  // const threadId = thread_id.id || "threadId";
 
   // スレッドの詳細情報を取得するAPIエンドポイントのURL
-  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts?offset=20`;
+  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?offset=10`;
   // コメントを投稿するAPIエンドポイントのURL
-  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${threadId}/posts`;
+  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`;
+
+  // ↑useParamと"thread/:thread_id"を確認。
 
   // コメントを投稿する関数
   const handleCommentSubmit = async (e) => {

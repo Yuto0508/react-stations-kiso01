@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export const ThreadList = () => {
   // ステートの初期化
-  const [thread, setThread] = useState([]); // スレッドのタイトルの配列
+  const [threads, setThreads] = useState([]); // スレッドのタイトルの配列
 
   // スレッドリストをAPIから取得する非同期関数
   async function getThreadList() {
@@ -19,7 +19,7 @@ export const ThreadList = () => {
         const threads = await response.json(); // レスポンスデータをJSON形式に変換
 
         // ステートにデータを設定
-        setThread(threads); // スレッドタイトルのステートを更新
+        setThreads(threads); // スレッドタイトルのステートを更新
       } else {
         console.error("APIリクエストが失敗しました"); // 失敗時のエラーログ
       }
@@ -35,7 +35,7 @@ export const ThreadList = () => {
 
 
   // スレッドリストを表示するJSX
-  const newThreadList = thread.map((newThread, index) => (
+  const newThreadList = threads.map((newThread, index) => (
     <li key={newThread.id}>{newThread.title}</li>
   ));
 
