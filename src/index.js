@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
-import App from "./App";
+import "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThreadList } from "./ThreadList";
 import { Threadcreationscreen } from "./Threadcreationscreen";
@@ -47,14 +47,7 @@ async function callApi() {
   console.log(users);
 }
 
-async function callApi2() {
-  const res = await fetch(
-    "https://railway.bulletinboard.techtrain.dev/threads/${id}/posts"
-  );
-  const users = await res.json();
-  console.log(users);
-}
+// "https://railway.bulletinboard.techtrain.dev/threads/${id}/posts"
 
 reportWebVitals();
 callApi();
-callApi2();
