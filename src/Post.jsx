@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Home } from "./Home";
 
 // Postコンポーネントを定義
 export const Post = () => {
@@ -15,7 +14,7 @@ export const Post = () => {
   // 投稿の詳細データを格納するステート
   const [detailData, setDetailData] = useState({
     threadId: "threadId",
-    posts: [],
+    posts: { content: "初期投稿" },
   });
   // 投稿が完了したかどうかを示すフラグ
   const [postComplete, setPostComplete] = useState(false);
@@ -25,12 +24,11 @@ export const Post = () => {
 
   const { thread_id } = useParams();
   console.log(thread_id);
-  // const threadId = thread_id.id || "threadId";
 
   // スレッドの詳細情報を取得するAPIエンドポイントのURL
-  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?offset=10`;
+  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?offset=20`;
   // コメントを投稿するAPIエンドポイントのURL
-  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?`;
+  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`;
 
   // ↑useParamと"thread/:thread_id"を確認。
 
@@ -105,8 +103,8 @@ export const Post = () => {
         )}
 
         <div>
-          <button className="row-button">投稿</button>
-          <button className="row-button" onClick={() => navigate("/Home")}>
+          <button type="submit" className="row-button">投稿</button>
+          <button type="button" className="row-button" onClick={() => navigate("/Home")}>
             戻る
           </button>
         </div>

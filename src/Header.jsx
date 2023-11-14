@@ -12,13 +12,6 @@ export const Header = () => {
           <Link to="/thread/new">スレッドを立てる</Link>
           {/* 他のコンポーネントと共に表示されるコンテンツ */}
         </div>
-        <div className="cat">
-          <img
-            src="https://csshtml.work/wp-content/uploads/cat.jpg"
-            width="200"
-            alt="子猫"
-          />
-        </div>
       </header>
     </header>
   );
