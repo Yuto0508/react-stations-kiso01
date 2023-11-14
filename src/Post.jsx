@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { Home } from "./Home";
 
 // Postコンポーネントを定義
 export const Post = () => {
@@ -9,7 +9,7 @@ export const Post = () => {
   // 現在のロケーション情報を取得
   const location = useLocation();
   // スレッドのIDとタイトルを取得
-  const { id, title } = location.state || { id: "", title: "" };
+  const { title } = location.state || { id: "", title: "" };
   // 新しいコメントの内容を格納するステート
   const [comment, setComment] = useState("");
   // 投稿の詳細データを格納するステート
@@ -24,12 +24,13 @@ export const Post = () => {
   const handleChange = (e) => setComment(e.target.value);
 
   const { thread_id } = useParams();
+  console.log(thread_id);
   // const threadId = thread_id.id || "threadId";
 
   // スレッドの詳細情報を取得するAPIエンドポイントのURL
   const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?offset=10`;
   // コメントを投稿するAPIエンドポイントのURL
-  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`;
+  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?`;
 
   // ↑useParamと"thread/:thread_id"を確認。
 
@@ -79,8 +80,8 @@ export const Post = () => {
   return (
     <form onSubmit={handleCommentSubmit}>
       <div>
-        <h3>title:確認用テスト {title}</h3>
-        <p>id:d0a27191-6aa9-4004-8c88-ca3d2b042e3 {id}</p>
+        <h3>title:{title}</h3>
+        <p>id:{thread_id}</p>
         <input
           id="newComment"
           value={comment}
@@ -105,7 +106,7 @@ export const Post = () => {
 
         <div>
           <button className="row-button">投稿</button>
-          <button className="row-button" onClick={() => navigate("/")}>
+          <button className="row-button" onClick={() => navigate("/Home")}>
             戻る
           </button>
         </div>

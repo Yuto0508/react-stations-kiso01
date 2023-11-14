@@ -31,6 +31,7 @@ root.render(
         <Route path="Home" element={<Home />} />
 
         <Route path="thread/:thread_id" element={<Post />} />
+        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
