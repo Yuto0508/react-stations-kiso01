@@ -1,6 +1,5 @@
 import React from "react";
 
-// PostList コンポーネント
 // props として受け取った投稿データ（posts）を表示する
 const PostList = ({ posts }) => {
   return (
