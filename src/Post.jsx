@@ -9,17 +9,16 @@ export const Post = () => {
   const { title } = location.state || { id: "", title: "" };
   const [detailData, setDetailData] = useState({
     threadId: "threadId",
-    posts: [{ content: "初期投稿" }],
+    posts: [],
   });
   const [postComplete, setPostComplete] = useState(false);
   const { thread_id } = useParams();
-  const threadDetailUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts?offset=20`;
-  const postCommentUrl = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`;
+  const url = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`;
 
   // コメントを投稿する関数
   const handleCommentSubmit = async (comment) => {
     try {
-      const response = await fetch(postCommentUrl, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +30,7 @@ export const Post = () => {
         setPostComplete(true);
 
         // 投稿成功後、スレッドの詳細情報を再取得
-        const detailResponse = await fetch(threadDetailUrl);
+        const detailResponse = await fetch(url);
         const detailData = await detailResponse.json();
         setDetailData(detailData);
       } else {
@@ -46,7 +45,7 @@ export const Post = () => {
   useEffect(() => {
     const fetchDetailData = async () => {
       try {
-        const response = await fetch(threadDetailUrl);
+        const response = await fetch(url);
         const data = await response.json();
         setDetailData(data);
       } catch (error) {
@@ -55,7 +54,7 @@ export const Post = () => {
     };
 
     fetchDetailData();
-  }, [threadDetailUrl]);
+  }, [url]);
 
   return (
     <div>
@@ -69,7 +68,7 @@ export const Post = () => {
       <PostList posts={detailData.posts} />
 
       {/* 戻るボタン */}
-      <button type="button" onClick={() => navigate("/Home")}>
+      <button type="button" onClick={() => navigate("/")}>
         戻る
       </button>
 
