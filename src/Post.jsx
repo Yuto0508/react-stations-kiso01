@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import PostForm from "./PostForm";  // PostForm コンポーネントのインポート
-import PostList from "./PostList";  // PostList コンポーネントのインポート
+import PostForm from "./PostForm"; // PostForm コンポーネントのインポート
+import PostList from "./PostList"; // PostList コンポーネントのインポート
 
 export const Post = () => {
   const navigate = useNavigate();
@@ -11,24 +11,21 @@ export const Post = () => {
     threadId: "threadId",
     posts: [],
   });
-  const [postComplete, setPostComplete] = useState(false);
   const { thread_id } = useParams();
   const url = `https://railway.bulletinboard.techtrain.dev/threads/${thread_id}/posts`;
 
   // コメントを投稿する関数
-  const handleCommentSubmit = async (comment) => {
+  const handleCommentSubmit = async (content) => {
     try {
       const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ content: comment }),
+        body: JSON.stringify({ post: content}),
       });
 
       if (response.ok) {
-        setPostComplete(true);
-
         // 投稿成功後、スレッドの詳細情報を再取得
         const detailResponse = await fetch(url);
         const detailData = await detailResponse.json();
@@ -47,6 +44,7 @@ export const Post = () => {
       try {
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
         setDetailData(data);
       } catch (error) {
         console.error("APIリクエストエラー:", error);
@@ -57,8 +55,8 @@ export const Post = () => {
   }, [url]);
 
   return (
-    <div>
-      <h3>title: {title}</h3>
+    <div className="Postform">
+      <h3>title: {title}Yutoの掲示板</h3>
       <p>id: {thread_id}</p>
 
       {/* コメント投稿フォームの表示 */}
@@ -71,9 +69,6 @@ export const Post = () => {
       <button type="button" onClick={() => navigate("/")}>
         戻る
       </button>
-
-      {/* 投稿が完了した場合に成功メッセージを表示 */}
-      {postComplete && <p>コメントを投稿しました</p>}
     </div>
   );
 };

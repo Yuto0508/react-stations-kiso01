@@ -16,12 +16,10 @@ h2 {
 }
 
 /* スレッドリストのスタイル */
-.newThreadList {
-  text-align: center; /* リスト内のテキストを中央に寄せる */
-}
-
 /* <li> 要素のスタイル */
 .newThreadList {
+  text-align: center; 
+  /* リスト内のテキストを中央に寄せる */
   width: 200px;
   margin: auto;
 }
@@ -55,4 +53,8 @@ h2 {
 .intitle input {
   width: calc(50% - 50px); /* 残りの幅を入力フィールドに割り当てます */
   box-sizing: border-box; /* 幅がボーダーボックス内に収まるようにします */
+}
+
+.Postform{
+  text-align: center;
 }

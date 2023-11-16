@@ -36,7 +36,7 @@ export const ThreadList = () => {
 
 
   // スレッドリストを表示するJSX
-  const newThreadList = threads.map((newThread, index) => (
+  const newThreadList = threads.map((newThread) => (
     <Link to={`thread/${newThread.id}`} >
     <li key={newThread.id}>{newThread.title}</li>
     </Link>
@@ -50,4 +50,4 @@ export const ThreadList = () => {
   );
 };
 
-
+export default ThreadList;

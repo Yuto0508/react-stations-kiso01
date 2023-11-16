@@ -24,7 +24,6 @@ root.render(
 
         <Route path="thread/:thread_id" element={<Post />} />
 
-        
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

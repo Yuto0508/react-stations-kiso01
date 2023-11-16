@@ -1,19 +1,25 @@
 import React from "react";
 
-// props として受け取った投稿データ（posts）を表示する
-const PostList = ({ posts }) => {
+const PostList = (props) => {
+  // props から投稿一覧を取得
+  const posts = props.posts;
+
+  // 投稿一覧を表示するための関数 newPostsList
+  const newPostsList = () => {
+    const list = [];
+    for (let a = 0; a < posts.length; a++) {
+      // 投稿一覧から各投稿の内容を取得し、リストアイテムとして追加
+      list.push(<li key={posts[a].id}>{posts[a].post}</li>);
+    }
+    return list;
+  };
+
+  // コンポーネントのレンダリング
   return (
-    <ul>
-      {/* 投稿が存在する場合のみ表示 */}
-      {posts && posts.length > 0 && (
-        <ul>
-          {/* 投稿データをマップしてリストアイテムに表示 */}
-          {posts.map((post, index) => (
-            <li key={index}>{post.content}</li>
-          ))}
-        </ul>
-      )}
-    </ul>
+    <div>
+      {/* 新しい投稿一覧を表示 */}
+      {newPostsList()}
+    </div>
   );
 };
 

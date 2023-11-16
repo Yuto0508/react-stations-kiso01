@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-// PostForm コンポーネント
+
 // props としてコメントが投稿された際の処理を受け取る（onCommentSubmit）
 const PostForm = ({ onCommentSubmit }) => {
   // コメントの入力内容を管理する state
