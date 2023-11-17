@@ -14,10 +14,15 @@ const PostForm = ({ onCommentSubmit }) => {
   // フォームが送信された際の処理
   const handleSubmit = (e) => {
     e.preventDefault();
-    // 親コンポーネントで受け取ったコメント投稿の処理を呼び出し
-    onCommentSubmit(comment);
-    // コメントの内容をクリア
-    setComment("");
+    if (comment.trim().length < 3) {
+      // タイトルが3文字未満の場合、画面遷移を行わない
+      alert("スレッドタイトルは3文字以上必要です。");
+      return;
+    }
+     // 親コンポーネントで受け取ったコメント投稿の処理を呼び出し
+     onCommentSubmit(comment);
+     // コメントの内容をクリア
+     setComment("");
   };
 
   // コンポーネントのレンダリング
