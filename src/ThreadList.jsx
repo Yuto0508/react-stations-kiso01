@@ -35,17 +35,24 @@ export const ThreadList = () => {
   }, []);
 
 
-  // スレッドリストを表示するJSX
-  const newThreadList = threads.map((newThread) => (
-    <Link to={`thread/${newThread.id}`} >
-    <li key={newThread.id}>{newThread.title}</li>
-    </Link>
-  ));
 
   return (
-    <div className="createdThread">
+     // スレッドリストを表示するJSX
+    <div className="newThreadList">
       <h2>新着スレッド</h2>
-      <ul className="newThreadList">{newThreadList}</ul>
+      <ul>
+      <table className="createdThreadtable">
+        <tbody>
+          {threads.map((newThread) => (
+            <tr key={newThread.id}>
+              <td>
+                <Link to={`thread/${newThread.id}`}>{newThread.title}</Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      </ul>
     </div>
   );
 };

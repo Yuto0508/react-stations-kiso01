@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import PostForm from "./PostForm"; // PostForm コンポーネントのインポート
 import PostList from "./PostList"; // PostList コンポーネントのインポート
 
 export const Post = () => {
-  const navigate = useNavigate();
   const location = useLocation();
   const { title } = location.state || { id: "", title: "" };
   const [detailData, setDetailData] = useState({
@@ -22,7 +21,7 @@ export const Post = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ post: content}),
+        body: JSON.stringify({ post: content }),
       });
 
       if (response.ok) {
@@ -56,19 +55,15 @@ export const Post = () => {
 
   return (
     <div className="Postform">
-      <h3>title: {title}Yutoの掲示板</h3>
-      <p>id: {thread_id}</p>
+      <h3>スレッドタイトル: {title}Yutoの掲示板</h3>
 
       {/* コメント投稿フォームの表示 */}
-      <PostForm onCommentSubmit={handleCommentSubmit} />
+      <div className="postFormContainer">
+        <PostForm onCommentSubmit={handleCommentSubmit} />
+      </div>
 
       {/* コメント一覧の表示 */}
       <PostList posts={detailData.posts} />
-
-      {/* 戻るボタン */}
-      <button type="button" onClick={() => navigate("/")}>
-        戻る
-      </button>
     </div>
   );
 };
