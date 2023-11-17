@@ -46,7 +46,7 @@ export const ThreadList = () => {
           {threads.map((newThread) => (
             <tr key={newThread.id}>
               <td>
-                <Link to={`thread/${newThread.id}`}>{newThread.title}</Link>
+                <Link to={`thread/${newThread.id}`} state={{ title: newThread.title }}>{newThread.title}</Link>
               </td>
             </tr>
           ))}

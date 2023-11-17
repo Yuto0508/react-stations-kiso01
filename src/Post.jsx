@@ -55,7 +55,7 @@ export const Post = () => {
 
   return (
     <div className="Postform">
-      <h3>スレッドタイトル: {title}Yutoの掲示板</h3>
+      <h3>{ title }</h3>
 
       {/* コメント投稿フォームの表示 */}
       <div className="postFormContainer">
